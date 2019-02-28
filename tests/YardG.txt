@@ -1,0 +1,19 @@
+18
+Program: ('';'static'),'program','<tag>','(',('input';'output';'<tag>')#(','),')',(''#(';',Declaration)),';',CompoundStatement,'.'
+ArraySpecification: 'array',FormalBounds,FormalComponent;'<tag>',('';FormalBounds),('';FormalComponent)
+CompoundStatement: 'begin',(NetExpression)#(';'),'end';'if',NetExpression,'then',(NetExpression)#(';'),('';('else',(NetExpression)#(';'))),'endif'
+Constant: '<number>';'<real>';'<string>';'<char>'
+ConstantDeclaration: 'const',('<tag>','=',Operand)#(';')
+Declaration: ConstantDeclaration;VariableDeclaration;NodeDeclaration
+FormalBounds: '[',('';('<tag>';Constant,('';'..',Constant))#(',')),']'
+FormalComponent: 'of',Specification
+ForStatement: 'for','all','<tag>','do',(NetExpression;CompoundStatement)
+NetExpression: (''#('<operation>'),Operand,('';PrimitiveResource))#('<operation>');Operand,('';PrimitiveResource),':=',NetExpression;ForStatement
+NodeDeclaration: 'node',VariableDeclaration;('';'static'),'node','<tag>',('';('(',('<tag>')#(','),')'));CompoundStatement
+Operand: '<tag>',(''#(SliceConstructor;'^'));'(',NetExpression,')';'<tag>',('';'(',('<tag>')#(','),')');Constant
+PointerSpecification: 'pointer',('';(('';'to'),'<tag>'))
+PrimitiveResource: '@',('input';'output';'<tag>')
+SliceConstructor: '[',(SubscriptExpression)#(','),']'
+Specification: ('bool';'byte';'char';'dword';'int';'longint';'shortint';'word';'bitrow';'double';'pointer';'real';'string'),('';'*','<number>');PointerSpecification;ArraySpecification
+SubscriptExpression: '<tag>';'all';NetExpression;'(',(SubscriptExpression)#(','),')'
+VariableDeclaration: (('<tag>')#(','),':',Specification)#(';')

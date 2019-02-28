@@ -1,0 +1,4 @@
+3
+A: C,(A,b;b);B,c
+C: a
+B: a,B,b,b;a,b,b
